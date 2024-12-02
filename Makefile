@@ -5,7 +5,6 @@ postgresql:
 			-p 5432:5432 \
 			-e POSTGRES_USER=root \
 			-e POSTGRES_PASSWORD=123456a@ \
-			-v ./postgres_db:/var/lib/postgresql/data \
 			-d \
 			--restart always \
 			postgres:12-alpine
@@ -25,4 +24,7 @@ migratedown:
 sqlc:
 	sqlc generate
 
-.PHONY: postgresql createdb dropdb migrateup migratedown sqlc
+test:
+	go test -v -cover ./...
+
+.PHONY: postgresql createdb dropdb migrateup migratedown sqlc test
