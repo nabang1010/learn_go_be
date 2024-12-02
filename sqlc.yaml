@@ -1,0 +1,26 @@
+version: "2"
+cloud:
+    organization: ""
+    project: ""
+    hostname: ""
+servers: []
+sql: 
+    - engine: "postgresql"
+      queries: "./db/query"
+      schema: "./db/migration"
+      gen:
+        go:
+          package: "db"
+          out: "./db/sqlc"
+          emit_json_tags: true # Add json tags to generated structs
+          emit_prepared_queries: false # Generate prepared statement queries
+          emit_interface: false # Generate interfaces for each repository
+          emit_exact_table_names: false # Use exact table names instead of pluralizing
+      
+overrides:
+    go: null
+plugins: []
+rules: []
+options: {}
+
+
