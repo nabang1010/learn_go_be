@@ -10,3 +10,8 @@ postgresql:
 			--restart always \
 			postgres:12-alpine
 
+createdb:
+	docker exec -it master_backend createdb --username=root --owner=root simple_bank
+
+dropdb:
+	docker exec -it master_backend dropdb simple_bank
