@@ -11,7 +11,18 @@ postgresql:
 			postgres:12-alpine
 
 createdb:
-	docker exec -it master_backend createdb --username=root --owner=root simple_bank
+	docker exec -it nabang1010_postgres createdb --username=root --owner=root simple_bank
 
 dropdb:
-	docker exec -it master_backend dropdb simple_bank
+	docker exec -it nabang1010_postgres dropdb simple_bank
+
+migrateup:
+	migrate -path db/migration -database "postgresql://root:123456a@@localhost:5432/simple_bank?sslmode=disable" -verbose up
+
+migratedown:
+	migrate -path db/migration -database "postgresql://root:123456a@@localhost:5432/simple_bank?sslmode=disable" -verbose down
+
+sqlc:
+	sqlc generate
+
+.PHONY: postgresql createdb dropdb migrateup migratedown sqlc
